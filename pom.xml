@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.sedovalx.cassandra</groupId>
+    <artifactId>cassandra-service-generator</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>Annotation processor for the generating of type safe java8 accessors and mappers over domain entities for the DataStax driver</description>
+	<url>https://github.com/sedovalx/cassandra-service-generator</url>
+	
+	<licenses>
+	  <license>
+		<name>The Apache License, Version 2.0</name>
+		<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+	  </license>
+	</licenses>
+	
+	<developers>
+		<developer>
+		  <name>Alexander Sedov</name>
+		  <email>sedov.alx@gmail.com</email>
+		  <organization>GitHub</organization>
+		  <organizationUrl>https://github.com/sedovalx</organizationUrl>
+		</developer>
+	</developers>
+	
+	<scm>
+        <url>https://github.com/sedovalx/cassandra-service-generator</url>
+    </scm>
+	
+	<properties>
+		<cassandra-driver.version>2.1.9</cassandra-driver.version>
+		<future.converter.version>0.3.0</future.converter.version>
+		<javapoet.version>1.3.0</javapoet.version>
+		<java.version>1.8</java.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<scala-maven-plugin.version>3.2.1</scala-maven-plugin.version>
+		<scala.version>2.11.7</scala.version>
+	</properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-mapping</artifactId>
+			<version>${cassandra-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+			<version>${javapoet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.javacrumbs.future-converter</groupId>
+            <artifactId>future-converter-java8-guava</artifactId>
+			<version>${future.converter.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${scala-maven-plugin.version}</version>
+                <configuration>
+                    <recompileMode>incremental</recompileMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                        <compilerArgs>
+                            <arg>-Xlint</arg>
+                            <arg>-proc:none</arg>
+                        </compilerArgs>
+                    </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
