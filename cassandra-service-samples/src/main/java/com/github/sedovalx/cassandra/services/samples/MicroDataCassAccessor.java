@@ -1,19 +1,18 @@
-package ru.croc.rosstat.csod.domain.cass.custom.accessors;
+package com.github.sedovalx.cassandra.services.samples;
 
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
-import com.datastax.driver.core.Statement;
 import com.datastax.driver.mapping.Result;
 import com.datastax.driver.mapping.annotations.Accessor;
 import com.datastax.driver.mapping.annotations.Query;
 import com.google.common.util.concurrent.ListenableFuture;
-import ru.croc.rosstat.csod.domain.cass.MicroDataCass;
+import com.github.sedovalx.cassandra.services.samples.MicroDataCass;
 
 /**
  * Author alsedov on 12.01.2016
  */
 @Accessor
-public interface MicroDataCassAccessor {
+interface MicroDataCassAccessor {
     @Query("delete from micro_data where togs = ? and tpl_code = ? and p_year = ? and p_code = ?")
     MicroDataCass deleteById1(int togs, String templateCode, int periodYear, int periodCode);
 

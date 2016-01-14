@@ -1,4 +1,4 @@
-package ru.croc.rosstat.csod.domain.cass;
+package com.github.sedovalx.cassandra.services.samples;
 
 import com.datastax.driver.mapping.annotations.ClusteringColumn;
 import com.datastax.driver.mapping.annotations.Column;
@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.croc.rosstat.csod.domain.cass.custom.accessors.MicroDataCassAccessor;
 
 
 import java.util.Date;

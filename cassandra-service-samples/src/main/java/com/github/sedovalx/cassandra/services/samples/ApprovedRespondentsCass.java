@@ -1,4 +1,4 @@
-package ru.croc.rosstat.csod.domain.cass;
+package com.github.sedovalx.cassandra.services.samples;
 
 import com.datastax.driver.mapping.annotations.ClusteringColumn;
 import com.datastax.driver.mapping.annotations.Column;

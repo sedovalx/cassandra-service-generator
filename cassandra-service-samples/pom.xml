@@ -12,6 +12,7 @@
     <artifactId>cassandra-service-samples</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>Samples for the annotation processing</description>
 
     <dependencies>
