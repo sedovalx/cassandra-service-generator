@@ -13,7 +13,7 @@ import scala.collection.JavaConverters._
 class ServiceSpecBuilder(accessor: Option[ClassName], mapper: Option[ClassName], tableMetadata: TableMetadata) {
     def buildSpec(): TypeSpec = {
         var methodSpecs = Seq.empty[MethodSpec]
-        var ctrBuilder = MethodSpec.constructorBuilder()
+        var ctrBuilder = MethodSpec.constructorBuilder().addModifiers(Modifier.PUBLIC)
         var specBuilder = TypeSpec.classBuilder(tableMetadata.entityName + tableMetadata.serviceSuffix).addModifiers(Modifier.PUBLIC)
 
         if (accessor.isDefined){
