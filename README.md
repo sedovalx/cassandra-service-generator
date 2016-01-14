@@ -2,7 +2,7 @@
 
 # cassandra-service-generator
 
-![logo image](http://photos2.meetupstatic.com/photos/event/a/5/c/a/600_388362442.jpeg)
+![logo image](http://www.codeguru.com.ua/up/news/img/001/n-166.gif)
 
 This processor generates for an annotated class:
 * mapper adapter with typesafe get method instead of Object... varargs
