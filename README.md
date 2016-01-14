@@ -1,4 +1,5 @@
 ![logo](http://photos2.meetupstatic.com/photos/event/a/5/c/a/600_388362442.jpeg)
+
 [![Build Status](https://travis-ci.org/sedovalx/cassandra-service-generator.svg?branch=master)](https://travis-ci.org/sedovalx/cassandra-service-generator)
 # cassandra-service-generator
 This processor generates for an annotated class:
