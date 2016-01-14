@@ -11,4 +11,4 @@ branches:
   - master
 
 script:
- - mvn clean deploy
+ - mvn clean deploy -s settings.xml
