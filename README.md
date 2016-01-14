@@ -1,2 +1,7 @@
 # cassandra-service-generator
-Annotation processor for generating of type safe java8 accessors and mappers over domain entities for the DataStax driver
+This processor generates for an annotated class:
+* mapper adapter with typesafe get method instead of Object... varargs
+* accessor for select methods with every possible WHERE conditions + deleteAll method (sync/async)
+* java8 adapter for the generated accessor
+
+More to come...
