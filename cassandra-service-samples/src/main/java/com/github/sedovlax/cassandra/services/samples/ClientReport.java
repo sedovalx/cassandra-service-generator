@@ -26,6 +26,7 @@ import java.util.UUID;
 @CassandraService(excludeKeys = {"dataId"}, customAccessor = ClientReportUpdateAccessor.class)
 @Table(keyspace = "sample", name = "client_report")
 public class ClientReport {
+    @QueryParams(consistency = "ONE", tracing = true)
     @PartitionKey(0)
     @Column(name = "region")
     private Integer region;

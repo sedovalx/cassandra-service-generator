@@ -18,8 +18,8 @@ abstract class AbstractAccessorJava8Adapter[Entity] {
         FutureConverter.toCompletableFuture(future).thenApply(toJavaFunction(toOptional))
     }
 
-    protected def toCompletableFutureIterable(future: ListenableFuture[Result[Entity]]): CompletableFuture[java.lang.Iterable[Entity]] = {
-        FutureConverter.toCompletableFuture(future).thenApply(toJavaFunction((it: Result[Entity]) => it))
+    protected def toCompletableFutureResult(future: ListenableFuture[Result[Entity]]): CompletableFuture[Result[Entity]] = {
+        FutureConverter.toCompletableFuture(future)
     }
 
     protected def toCompletableFutureResultSet(future: ResultSetFuture): CompletableFuture[ResultSet] = {

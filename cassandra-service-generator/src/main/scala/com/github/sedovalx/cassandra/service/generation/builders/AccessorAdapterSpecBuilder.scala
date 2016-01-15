@@ -93,8 +93,8 @@ class AccessorAdapterSpecBuilder(entityType: ClassName, accessorPackageName: Str
                     case fxa: ParameterizedTypeName if isGenericResult(fxa.rawType) =>
                         // ListenableFuture[Result[T]] -> CompletableFuture[Iterable[T]]
                         ReturnTypeAndStatement(
-                            Some(types.entityIterableFuture),
-                            s"return toCompletableFutureIterable($sourceMethodCall)"
+                            Some(types.entityResultFuture),
+                            s"return toCompletableFutureResult($sourceMethodCall)"
                         )
                     case _ => defaultResult
                 }

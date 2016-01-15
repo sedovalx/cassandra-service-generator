@@ -41,5 +41,8 @@ public @interface CassandraService {
      */
     String serviceSuffix() default "Service";
 
+    /**
+     * Custom accessor interface which Query-methods will be merged into the generated accessor
+     */
     Class<?> customAccessor() default void.class;
 }

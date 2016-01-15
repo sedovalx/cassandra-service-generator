@@ -68,12 +68,12 @@ case class BuildTypes(typeElement: TypeElement) {
         )
     )
     /**
-      * CompletableFuture<Iterable<T>>
+      * CompletableFuture<Result<T>>
       */
-    val entityIterableFuture = ParameterizedTypeName.get(
+    val entityResultFuture = ParameterizedTypeName.get(
         ClassName.get(classOf[CompletableFuture[_]]),
             ParameterizedTypeName.get(
-                ClassName.get(classOf[Iterable[_]]),
+                ClassName.get(classOf[Result[_]]),
                 nullableEntity
         )
     )
