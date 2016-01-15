@@ -4,10 +4,9 @@
 
 # cassandra-service-generator
 
-For each annotated class next classes will be generated:
-* mapper adapter with typesafe get method instead of Object... varargs
-* accessor for select methods with every possible WHERE conditions + deleteAll method (sync/async)
-* java8 adapter for the generated accessor
+## Good to know
+
+* https://docs.datastax.com/en/developer/java-driver/2.1/java-driver/reference/objectMappingApi.html
 
 ## Installation
 
