@@ -4,7 +4,7 @@
 
 # cassandra-service-generator
 
-This processor generates for an annotated class:
+For each annotated class next classes will be generated:
 * mapper adapter with typesafe get method instead of Object... varargs
 * accessor for select methods with every possible WHERE conditions + deleteAll method (sync/async)
 * java8 adapter for the generated accessor
@@ -36,9 +36,8 @@ First of all you need to annotate your table class by the CassandraService annot
 public class ClientReport {
     @PartitionKey(0)
     @Column(name = "region")
-    private Integer region;
+    private Long region;
 
-    @QueryParams(consistency = "ALL", tracing = true)
     @ClusteringColumn(0)
     @Column(name = "tpl_code")
     private String templateCode;
@@ -73,12 +72,12 @@ public class ClientReport {
 ```
 
 After successful compilation there are generated services in the target/generated-sources/annotation/your_entity_package/ 
-folder. By default an accessor, a mapper, a service and the accessor's java8 adapter are produced. Don't forget annotate
+folder. By default an accessor, a mapper, a service and the accessor's java8 adapter are produced. Don't forget to annotate
 your table class with @Table. 
  
 ### Accessor
  
-There are very limited amount of WHERE clauses for the SELECT statement available for any C*-table. This amount equals 
+There are very limited amount of WHERE clauses for the SELECT statement available for any Cassandra-table. This amount equals 
 to clustering keys count plus one. The generated accessor contains all of them as overloading of method with "get" name.
 Overloads have different number of parameters, each parameter corresponds to one of the **primary** key parts as they 
 are specified in the table class. Both sync and async versions of methods are generated, async version has name "getAsync".
