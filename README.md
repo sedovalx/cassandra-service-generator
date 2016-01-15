@@ -22,6 +22,7 @@ No release yet, possible bugs. You can find it in the https://oss.sonatype.org/c
     <groupId>com.github.sedovalx.cassandra.services</groupId>
     <artifactId>cassandra-service-generator</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <scope>provided</scope>
 </dependency>
 ```
 
