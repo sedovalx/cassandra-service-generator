@@ -324,3 +324,33 @@ accessor visible in the package only if you want.
 @CassandraService(customAccessor = ClientReportUpdateAccessor.class)
 ```
 
+## Usage
+
+Typical scenario is to define a Spring (or other IoC) config for generated classes. Be aware of the MappingManager bean that should be placed into the IoC-container:
+
+``` java
+@Configuration
+public class CassandraConfig {
+    @Bean
+    public MappingManager mappingManager() {
+        Cluster cluster = Cluster.builder().addContactPoint("127.0.0.1").withPort(9142).build()
+        Session session = cluster.connect("sample");
+        return new MappingManager(session);
+    }
+}
+
+@Configuration
+public class ServicesConfig {
+    @Autowired
+    private MappingManager mappingManager;
+    
+    @Bean
+    public ClientReportService clientReportService(){
+        ClientReportAccessorAdapter accessor = new ClientReportAccessorAdapter(mappingManager);
+        ClientReportMapper mapper = new ClientReportMapper(mappingManager);
+        return new ClientReportService(accessor, mapper);
+    }
+}
+```
+
+For cassandra-unit tests mentioned beans should be lazy to give the cassandra service time to start. See the example in the cassandra-service-samples module.
