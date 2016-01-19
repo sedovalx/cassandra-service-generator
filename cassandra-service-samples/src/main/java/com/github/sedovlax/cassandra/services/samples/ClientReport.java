@@ -23,10 +23,9 @@ import java.util.UUID;
 @ToString(exclude = {"data"})
 @EqualsAndHashCode
 @QueryParams(consistency = "QUORUM", fetchSize = 1000)
-@CassandraService(excludeKeys = {"dataId"}, customAccessor = ClientReportUpdateAccessor.class)
+@CassandraService(customAccessor = ClientReportUpdateAccessor.class)
 @Table(keyspace = "sample", name = "client_report")
 public class ClientReport {
-    @QueryParams(consistency = "ONE", tracing = true)
     @PartitionKey(0)
     @Column(name = "region")
     private Integer region;
@@ -48,16 +47,12 @@ public class ClientReport {
     @Column(name = "client_id")
     private Long clientId;
 
-    @ClusteringColumn(4)
-    @Column(name = "data_id")
-    private UUID dataId;
-
-    @Column(name = "data")
+    @Column
     private String data;
 
-    @Column(name = "ver")
+    @Column
     private Date ver;
 
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+    @Column
+    private boolean deleted;
 }

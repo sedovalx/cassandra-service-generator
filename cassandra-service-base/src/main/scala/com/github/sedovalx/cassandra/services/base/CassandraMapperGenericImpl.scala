@@ -22,16 +22,20 @@ abstract class CassandraMapperGenericImpl[Entity](mappingManager: MappingManager
 
     override def saveQuery(entity: Entity): Statement = mapper.saveQuery(entity)
 
+    @varargs
     override def save(entity: Entity, options: Mapper.Option*): Unit = mapper.save(entity, options:_*)
 
+    @varargs
     override def saveAsync(entity: Entity, options: Mapper.Option*): CompletableFuture[Void] = {
         FutureConverter.toCompletableFuture(mapper.saveAsync(entity, options:_*))
     }
 
     override def deleteQuery(entity: Entity): Statement = mapper.deleteQuery(entity)
 
+    @varargs
     override def delete(entity: Entity, options: Mapper.Option*) = mapper.delete(entity, options:_*)
 
+    @varargs
     override def deleteAsync(entity: Entity, options: Mapper.Option*): CompletableFuture[Void] = {
         FutureConverter.toCompletableFuture(mapper.deleteAsync(entity, options:_*))
     }

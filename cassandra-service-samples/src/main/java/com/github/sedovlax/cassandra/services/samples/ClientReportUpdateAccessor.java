@@ -13,15 +13,12 @@ import com.google.common.util.concurrent.ListenableFuture;
  */
 @Accessor
 interface ClientReportUpdateAccessor {
-    @Query("update client_region set is_deleted = true where region = ?")
-    Result<ClientReport> markAllByRegion(int region);
-
-    @Query("delete from client_region where region = ?")
+    @Query("delete from client_report where region = ?")
     ResultSet deleteAllInRegion(int region);
 
-    @Query("update client_region set is_deleted = true where region = ? and tpl_code = ? and p_year = ? and p_code = ? and client_id = ?")
-    ListenableFuture<Result<ClientReport>> markAllByClient(int region, String templateCode, int periodYear, int periodCode, long clientId);
+    @Query("update client_report set data = ? where region = ? and tpl_code = ? and p_year = ? and p_code = ? and client_id = ?")
+    Result<ClientReport> updateData(String newData, int region, String templateCode, int periodYear, int periodCode, long clientId);
 
-    @Query("update client_region set data = ? where region = ? and tpl_code = ? and p_year = ? and p_code = ? and client_id = ?")
-    Statement updateData(String newData, int region, String templateCode, int periodYear, int periodCode, long clientId);
+    @Query("select data, deleted from client_report where region = ?")
+    Statement getByRegion(int region);
 }

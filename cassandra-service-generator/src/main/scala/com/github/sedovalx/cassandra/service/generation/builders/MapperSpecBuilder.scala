@@ -39,6 +39,7 @@ class MapperSpecBuilder(metadata: TableMetadata, types: BuildTypes) {
 
     private def buildConstructor(): MethodSpec = {
         MethodSpec.constructorBuilder()
+            .addModifiers(Modifier.PUBLIC)
             .addParameter(classOf[MappingManager], "mappingManager")
             .addStatement("super(mappingManager)")
             .build()
