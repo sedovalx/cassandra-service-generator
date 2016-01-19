@@ -10,3 +10,4 @@ buildNumber.properties
 .project/
 .hg/
 .hgignore
+**/*.iml
