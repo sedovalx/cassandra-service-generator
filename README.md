@@ -28,7 +28,7 @@ No release yet, possible bugs. You can find it in the https://oss.sonatype.org/c
 
 ## CassandraService annotation processing
 
-First of all you need to annotate your table class by the CassandraService annotation  
+First of all you need to annotate your table class with the CassandraService annotation  
 
 ``` java
 @CassandraService
@@ -71,20 +71,20 @@ public class ClientReport {
 }
 ```
 
-After successful compilation there are generated services in the target/generated-sources/annotation/your_entity_package/ 
-folder. By default an accessor, a mapper, a service and the accessor's java8 adapter are produced. Don't forget to annotate
-your table class with @Table. 
+After successful compilation there are four generated services in the target/generated-sources/annotation/your_entity_package/ 
+folder. By default it are an accessor, a mapper, a service and the accessor's java8 adapter. Don't forget to annotate
+your table class with @Table, the generator won't work otherwise. 
  
 ### Accessor
  
 There are very limited amount of WHERE clauses for the SELECT statement available for any Cassandra-table. This amount equals 
-to clustering keys count plus one. The generated accessor contains all of them as overloading of method with "get" name.
-Overloads have different number of parameters, each parameter corresponds to one of the **primary** key parts as they 
+to the clustering keys count plus one. The generated accessor contains all of them as overloadings of a methods with "get"/"getAsync" names.
+The overloads have different number of parameters, each parameter corresponds to one of the **primary** key parts as they 
 are specified in the table class. Both sync and async versions of methods are generated, async version has name "getAsync".
 Methods "getAll" and "deleteAll" are generated too (sync/async).
 
  
-For the example above next accessor would generate:
+For the example above next accessor will be generated:
 
 ``` java
 @Accessor
@@ -139,7 +139,7 @@ public interface ClientReportAccessor {
 }
 ```
 
-Check that "full key" methods return a single object instead of an Iterable. 
+Check that "full primary key" methods return a single object instead of an Iterable. 
 
 If you for any reason want to exclude some of the primary key parts from generation process specify `excludeKeys` 
 property of the annotation:
@@ -148,8 +148,8 @@ property of the annotation:
 @CassandraService(excludeKeys = { "dataId" })
 ```
 
-The `QueryParams` annotation can be user to control consistency level and etc for the generated "get" methods. Just 
-annotate with it the whole table class or any of the primary key's fields:
+The `QueryParams` annotation can be used to control consistency level and etc for the generated "get" methods. Just 
+annotate the whole table class or any of the primary key's fields with it:
 
 ``` java
 @QueryParams(consistency = "ALL", tracing = true)
@@ -169,7 +169,7 @@ accessor. It change return types of the accessor's methods by the following rule
 + ResultSetFuture translates to CompletableFuture<ResultSet> 
 + Others don't change
 
-For complete list of possible return types see [DataStax documentation](https://docs.datastax.com/en/developer/java-driver/2.1/common/drivers/reference/accessorAnnotatedInterfaces.html)
+For complete list of possible return types for an accessor see [DataStax documentation](https://docs.datastax.com/en/developer/java-driver/2.1/common/drivers/reference/accessorAnnotatedInterfaces.html)
  
 Example for the table above:
   
@@ -257,8 +257,8 @@ public class ClientReportAccessorAdapter extends AbstractAccessorJava8Adapter<Cl
   
 ### Mapper
   
-The purpose of the generated mapper is very like as for the adapter - to provide java8 API and safer form of "get/getAsync" 
-methods. So it wraps DataStax's `mapper.get(Object... objects)` call with varargs parameters:
+The purpose of the generated mapper is very like as for the generated adapter - to provide java8 API and safer form of "get/getAsync" 
+methods. It wraps DataStax's `mapper.get(Object... objects)` call with a method with type safe signature:
    
 ``` java
 public class ClientReportMapper extends CassandraMapperGenericImpl<ClientReport> {
@@ -302,7 +302,7 @@ For the sake of convenience the service is generated also. It just aggregate the
 
 ### Other parameters
 
-Except `excludeKeys` parameter the CassandraService has a bunch of settings that can help slightly change the generation 
+Except `excludeKeys` parameter the CassandraService annotation has a bunch of settings that can help slightly change the generation 
 process:
 + excludeKeys - Exclude some keys from accessor/mapper generating process
 + generateMapper - Should generate mappers?
@@ -316,9 +316,9 @@ process:
 
 It's easy to see that SELECT only queries in the accessor are not enough. But I don't see the possibility to generate 
 UPDATE-queries for every case. What you can do is to create another ordinary accessor for the table by hands and include  
-in it any queries you want. Then use `customAccessor` parameter of the CassandraService annotation to merge that queries into 
-the generated accessor. Additional java8-adapter methods you'll get for free. Btw it's possible to make the custom 
-accessor visible in the package only if you want.
+any queries you want into it. Then use `customAccessor` parameter of the CassandraService annotation to merge that queries into 
+the generated accessor. Additional java8-adapter methods you'll get for free. Btw it's possible to limit the visibility of the custom 
+accessor to the package level if you want.
 
 ``` java
 @CassandraService(customAccessor = ClientReportUpdateAccessor.class)
@@ -326,7 +326,7 @@ accessor visible in the package only if you want.
 
 ## Usage
 
-Typical scenario is to define a Spring (or other IoC) config for generated classes. Be aware of the MappingManager bean that should be placed into the IoC-container:
+The typical scenario is to define a Spring (or other IoC) config for generated classes. Be aware of the MappingManager bean that should be placed into the IoC-container:
 
 ``` java
 @Configuration
