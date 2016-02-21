@@ -346,9 +346,7 @@ public class ServicesConfig {
     
     @Bean
     public ClientReportService clientReportService(){
-        ClientReportAccessorAdapter accessor = new ClientReportAccessorAdapter(mappingManager);
-        ClientReportMapper mapper = new ClientReportMapper(mappingManager);
-        return new ClientReportService(accessor, mapper);
+        return new ClientReportService(mappingManager);
     }
 }
 ```
