@@ -1,9 +1,10 @@
 package com.github.sedovalx.cassandra.service.generation.builders
 
+import java.util.function.Supplier
 import javax.lang.model.element.Modifier
 
 import com.datastax.driver.mapping.MappingManager
-import com.squareup.javapoet.{MethodSpec, ClassName, TypeSpec}
+import com.squareup.javapoet.{ParameterizedTypeName, MethodSpec, ClassName, TypeSpec}
 import com.github.sedovalx.cassandra.service.generation.metadata.TableMetadata
 
 import scala.collection.JavaConverters._
@@ -14,21 +15,25 @@ import scala.collection.JavaConverters._
 class ServiceSpecBuilder(accessor: Option[ClassName], mapper: Option[ClassName], tableMetadata: TableMetadata) {
     def buildSpec(): TypeSpec = {
         var methodSpecs = Seq.empty[MethodSpec]
-        val ctrBuilder = MethodSpec.constructorBuilder()
-            .addModifiers(Modifier.PUBLIC)
-            .addParameter(classOf[MappingManager], "mappingManager")
-            .addStatement("this.mappingManager = mappingManager")
-
+        val mappingSupplierType = ParameterizedTypeName.get(
+            ClassName.get(classOf[Supplier[_]]),
+            ClassName.get(classOf[MappingManager])
+        )
         var specBuilder = TypeSpec.classBuilder(tableMetadata.entityName + tableMetadata.serviceSuffix)
             .addModifiers(Modifier.PUBLIC)
-            .addField(classOf[MappingManager], "mappingManager", Modifier.PRIVATE)
+            .addField(mappingSupplierType, "mappingManagerSupplier", Modifier.PRIVATE)
+
+        val ctrBuilder = MethodSpec.constructorBuilder()
+            .addModifiers(Modifier.PUBLIC)
+            .addParameter(mappingSupplierType, "mappingManagerSupplier")
+            .addStatement("this.mappingManagerSupplier = mappingManagerSupplier")
 
         if (accessor.isDefined){
             methodSpecs = methodSpecs :+ MethodSpec.methodBuilder("accessor")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(accessor.get)
                 .beginControlFlow("if (this.accessor == null)")
-                .addStatement("this.accessor = new $T(this.mappingManager)", accessor.get)
+                .addStatement("this.accessor = new $T(this.mappingManagerSupplier.get())", accessor.get)
                 .endControlFlow()
                 .addStatement("return this.accessor")
                 .build()
@@ -40,7 +45,7 @@ class ServiceSpecBuilder(accessor: Option[ClassName], mapper: Option[ClassName],
                 .addModifiers(Modifier.PUBLIC)
                 .returns(mapper.get)
                 .beginControlFlow("if (this.mapper == null)")
-                .addStatement("this.mapper = new $T(this.mappingManager)", mapper.get)
+                .addStatement("this.mapper = new $T(this.mappingManagerSupplier.get())", mapper.get)
                 .endControlFlow()
                 .addStatement("return this.mapper")
                 .build()

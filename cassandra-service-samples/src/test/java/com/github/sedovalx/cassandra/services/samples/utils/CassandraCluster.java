@@ -12,6 +12,7 @@ public class CassandraCluster implements AutoCloseable {
     private final int port;
     private final String keyspace;
     private Cluster cluster;
+    private Session session;
 
     public CassandraCluster(String address, int port, String keyspace) {
         this.address = address;
@@ -19,7 +20,7 @@ public class CassandraCluster implements AutoCloseable {
         this.keyspace = keyspace;
     }
 
-    public Session connect() {
+    private Session connect() {
         cluster = Cluster.builder().addContactPoint(address).withPort(port).build();
         return cluster.connect(keyspace);
     }
@@ -27,5 +28,12 @@ public class CassandraCluster implements AutoCloseable {
     @Override
     public void close() throws Exception {
         cluster.close();
+    }
+
+    public Session session(){
+        if (session == null) {
+            session = connect();
+        }
+        return session;
     }
 }
