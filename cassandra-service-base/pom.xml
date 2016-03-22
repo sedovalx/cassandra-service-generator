@@ -16,10 +16,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-mapping</artifactId>
         </dependency>
@@ -31,10 +27,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
