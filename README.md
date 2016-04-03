@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/sedovalx/cassandra-service-generator.svg?branch=master)](https://travis-ci.org/sedovalx/cassandra-service-generator)
 
 # cassandra-service-generator
+This library is targeted to provide a typesafe way of passing keys to query methods of the [DataStax Driver](https://github.com/datastax/java-driver). For this purpose the library includes an annotation processor that generates a thin service class layer over the Mapper<T> instances for each annotated domain entity class. This service class contains read, write and delete methods which have input parameters that strictly depends on the key set of the source domain entity class. 
+Also the generator generates a variety of an entity accessor's query methods to cover all (?) possible combinations of the WHERE clause for the table. I believe it reduce the number of typo errors in the accessor's CQL queries and its parameters.
 
 ## Good to know
 
