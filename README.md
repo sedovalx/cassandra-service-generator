@@ -5,14 +5,15 @@
 # cassandra-service-generator
 This library is targeted to provide a typesafe way of passing keys to query methods of the [DataStax Driver](https://github.com/datastax/java-driver). For this purpose the library includes an annotation processor that generates a thin service class layer over the Mapper<T> instances for each annotated domain entity class. This service class contains read, write and delete methods which have input parameters that strictly depends on the key set of the source domain entity class. 
 Also the generator generates a variety of an entity accessor's query methods to cover all (?) possible combinations of the WHERE clause for the table. I believe it reduce the number of typo errors in the accessor's CQL queries and its parameters.
+Despite the fact that the annotation processor module is written in Scala there is no dependency on the scala-library in the runtime for the generated code.
 
-## Good to know
+## To start with
 
 * https://docs.datastax.com/en/developer/java-driver/2.1/java-driver/reference/objectMappingApi.html
 
 ## Installation
 
-No release yet, possible bugs. You can find it in the https://oss.sonatype.org/content/repositories/snapshots repository.
+I use the library in a production code but the api is still subject of change so no release yet. The artifacts can be found it in the https://oss.sonatype.org/content/repositories/snapshots repository for now.
 
 ``` xml
 <dependency>
