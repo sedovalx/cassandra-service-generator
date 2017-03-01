@@ -49,6 +49,8 @@ class AccessorSpecBuilder(metadata: TableMetadata, types: BuildTypes, typeUtils:
         Seq(
             buildGetAll(types),
             buildGetAllAsync(types),
+            buildDeleteByPartition(partitionKeys, types),
+            buildDeleteByPartitionAsync(partitionKeys, types),
             buildDeleteAll(types),
             buildDeleteAllAsync(types)
         ).union(getMethods).union(buildCustomMethods())
@@ -113,6 +115,20 @@ class AccessorSpecBuilder(metadata: TableMetadata, types: BuildTypes, typeUtils:
             .makeAbstract()
     }
 
+    private def buildDeleteByPartition(partitionKeys: List[KeyMetadata], types: BuildTypes): MethodSpec.Builder = {
+        MethodSpecUtils.public("deleteByPartitionKey").addParameters(partitionKeys.asParameterSpecs)
+          .addAnnotation(buildDeleteQueryAnnotation(partitionKeys))
+          .returns(types.entityResult)
+          .makeAbstract()
+    }
+
+    private def buildDeleteByPartitionAsync(partitionKeys: List[KeyMetadata], types: BuildTypes): MethodSpec.Builder = {
+        MethodSpecUtils.public("deleteByPartitionKeyAsync").addParameters(partitionKeys.asParameterSpecs)
+          .addAnnotation(buildDeleteQueryAnnotation(partitionKeys))
+          .returns(types.entityResultGuavaFuture)
+          .makeAbstract()
+    }
+
     private def buildGetQueryAnnotation(whereItems: Seq[KeyMetadata] = Nil, isSingle: Boolean): AnnotationSpec = {
         val keysOrdered = whereItems.sortBy(it => (!it.isPartitionKey, !it.isClusteringKey, it.keyIndex)).map(_.name)
         val cql = CqlBuilder.select(metadata.name, keysOrdered, if (isSingle) Some(1) else None)
@@ -121,6 +137,12 @@ class AccessorSpecBuilder(metadata: TableMetadata, types: BuildTypes, typeUtils:
 
     private def buildDeleteAllQueryAnnotation(): AnnotationSpec = {
         AnnotationSpec.builder(classOf[Query]).addMember("value", s""""truncate ${metadata.name}"""").build()
+    }
+
+    private def buildDeleteQueryAnnotation(whereItems: Seq[KeyMetadata]): AnnotationSpec = {
+        val keysOrdered = whereItems.map(it => it.name + " = ?").mkString(" AND ")
+        val cql = s"delete from ${metadata.name} WHERE $keysOrdered"
+        AnnotationSpec.builder(classOf[Query]).addMember("value", s""""$cql"""").build()
     }
 
     private def buildCustomMethods(): Seq[MethodSpec.Builder] = {

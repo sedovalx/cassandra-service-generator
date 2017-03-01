@@ -6,13 +6,9 @@ import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 import com.github.sedovalx.cassandra.service.generation.annotations.CassandraService;
 import com.github.sedovalx.cassandra.service.generation.annotations.QueryParams;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Alexander
@@ -20,6 +16,8 @@ import java.util.UUID;
  */
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString(exclude = {"data"})
 @EqualsAndHashCode
 @QueryParams(consistency = "QUORUM", fetchSize = 1000)

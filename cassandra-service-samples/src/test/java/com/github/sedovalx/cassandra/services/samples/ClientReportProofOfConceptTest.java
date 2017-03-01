@@ -19,6 +19,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,4 +98,20 @@ public class ClientReportProofOfConceptTest {
         Assert.assertTrue(actualReport.isPresent());
         Assert.assertEquals(expectedData, actualReport.get().getData());
     }
+
+    @Test
+    public void testDeleteData() {
+        ClientReport report = new ClientReport(73, "1234566577", 2016, 5, 444L, "data", new Date(), false);
+        ClientReport report2 = new ClientReport(73, "1234566577", 2014, 5, 444L, "data", new Date(), false);
+        ClientReport report3 = new ClientReport(74, "1234566578", 2016, 5, 444L, "data", new Date(), false);
+        service.mapper().save(report);
+        service.mapper().save(report2);
+        service.mapper().save(report3);
+
+        Assert.assertEquals(2, service.accessor().get(73).all().size());
+        service.accessor().deleteByPartitionKey(73);
+        Assert.assertEquals(0, service.accessor().get(73).all().size());
+        Assert.assertEquals(1, service.accessor().get(74).all().size());
+    }
+
 }
