@@ -19,12 +19,12 @@ I use the library in a production code but the api is still subject of change so
 <dependency>
     <groupId>com.github.sedovalx.cassandra.services</groupId>
     <artifactId>cassandra-service-base</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 </dependency>
 <dependency>
     <groupId>com.github.sedovalx.cassandra.services</groupId>
     <artifactId>cassandra-service-generator</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <scope>provided</scope>
 </dependency>
 ```
