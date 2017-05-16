@@ -62,17 +62,17 @@
             <dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-base</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.${TRAVIS_BUILD_NUMBER}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-generator</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.${TRAVIS_BUILD_NUMBER}</version>
             </dependency>
 			<dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-samples</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.${TRAVIS_BUILD_NUMBER}</version>
             </dependency>
 
             <dependency>
