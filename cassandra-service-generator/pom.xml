@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.github.sedovalx.cassandra.services</groupId>
         <artifactId>cassandra-service-parent</artifactId>
-        <version>1.0.25</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>cassandra-service-generator</artifactId>
-    <version>1.0.25</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Annotation processor for the generating of type safe java8 accessors and mappers over domain entities for the DataStax driver</description>
