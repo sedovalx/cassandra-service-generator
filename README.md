@@ -13,20 +13,42 @@ Despite the fact that the annotation processor module is written in Scala there 
 
 ## Installation
 
-I use the library in a production code but the api is still subject of change so no release yet. The artifacts can be found it in the https://oss.sonatype.org/content/repositories/snapshots repository for now.
+I use the library in a production code but the api is still subject of change so no release yet. The artifacts can be found in the Bintray repository. The configuration is below:
 
 ``` xml
-<dependency>
-    <groupId>com.github.sedovalx.cassandra.services</groupId>
-    <artifactId>cassandra-service-base</artifactId>
-    <version>1.0.1</version>
-</dependency>
-<dependency>
-    <groupId>com.github.sedovalx.cassandra.services</groupId>
-    <artifactId>cassandra-service-generator</artifactId>
-    <version>1.0.1</version>
-    <scope>provided</scope>
-</dependency>
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'
+          xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    
+    <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-sedovalx-com.github.sedovalx</id>
+                    <name>bintray</name>
+                    <url>http://dl.bintray.com/sedovalx/com.github.sedovalx</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-sedovalx-com.github.sedovalx</id>
+                    <name>bintray-plugins</name>
+                    <url>http://dl.bintray.com/sedovalx/com.github.sedovalx</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>bintray</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>bintray</activeProfile>
+    </activeProfiles>
+</settings>
 ```
 
 ## CassandraService annotation processing
