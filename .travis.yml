@@ -11,4 +11,4 @@ branches:
   - master
 
 script:
- - mvn clean mvn versions:set deploy -s settings.xml -DnewVersion=1.0.$TRAVIS_BUILD_NUMBER
+ - mvn clean versions:set deploy -s settings.xml -DnewVersion=1.0.$TRAVIS_BUILD_NUMBER
