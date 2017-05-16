@@ -35,7 +35,7 @@
         <repository>
             <id>bintray-sedovalx-com.github.sedovalx</id>
             <name>sedovalx-com.github.sedovalx</name>
-            <url>https://api.bintray.com/maven/sedovalx/com.github.sedovalx/com.github.sedovalx.cassandra.services/;publish=1</url>
+            <url>https://api.bintray.com/maven/sedovalx/com.github.sedovalx/com.github.sedovalx.cassandra.services/</url>
         </repository>
     </distributionManagement>
 
