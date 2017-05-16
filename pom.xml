@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.sedovalx.cassandra.services</groupId>
     <artifactId>cassandra-service-parent</artifactId>
-    <version>1.0.35</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -62,17 +62,17 @@
             <dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-base</artifactId>
-                <version>1.0.35</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-generator</artifactId>
-                <version>1.0.35</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
 			<dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-samples</artifactId>
-                <version>1.0.35</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
