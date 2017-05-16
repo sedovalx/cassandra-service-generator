@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.sedovalx.cassandra.services</groupId>
     <artifactId>cassandra-service-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.${TRAVIS_BUILD_NUMBER}</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -32,10 +32,11 @@
     </scm>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
+        <repository>
+            <id>bintray-sedovalx-com.github.sedovalx</id>
+            <name>sedovalx-com.github.sedovalx</name>
+            <url>https://api.bintray.com/maven/sedovalx/com.github.sedovalx/com.github.sedovalx.cassandra.services/;publish=1</url>
+        </repository>
     </distributionManagement>
 
     <properties>
@@ -134,17 +135,6 @@
                             <arg>-Xlint</arg>
                             <arg>-proc:none</arg>
                         </compilerArgs>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>${nexus-staging-maven-plugin.version}</version>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
             </plugins>

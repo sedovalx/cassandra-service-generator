@@ -5,9 +5,9 @@
 
     <servers>
         <server>
-            <id>ossrh</id>
-            <username>${env.NEXUS_USERNAME}</username>
-            <password>${env.NEXUS_PASSWORD}</password>
+            <id>bintray-sedovalx-com.github.sedovalx</id>
+            <username>${BINTRAY_USERNAME}</username>
+            <password>${BINTRAY_API_KEY}</password>
         </server>
     </servers>
 
