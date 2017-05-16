@@ -11,9 +11,9 @@ Despite the fact that the annotation processor module is written in Scala there 
 
 * https://docs.datastax.com/en/developer/java-driver/2.1/java-driver/reference/objectMappingApi.html
 
-## Installation
+## Build configuration
 
-I use the library in a production code but the api is still subject of change so no release yet. The artifacts can be found in the Bintray repository. The configuration is below:
+The artifacts can be found in the Bintray repository. The configuration is below:
 
 ``` xml
 <?xml version="1.0" encoding="UTF-8" ?>
