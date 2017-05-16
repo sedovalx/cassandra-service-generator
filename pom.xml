@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.sedovalx.cassandra.services</groupId>
     <artifactId>cassandra-service-parent</artifactId>
-    <version>1.0.${env.TRAVIS_BUILD_NUMBER}</version>
+    <version>1.0.35</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -62,17 +62,17 @@
             <dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-base</artifactId>
-                <version>1.0.${env.TRAVIS_BUILD_NUMBER}</version>
+                <version>1.0.35</version>
             </dependency>
             <dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-generator</artifactId>
-                <version>1.0.${env.TRAVIS_BUILD_NUMBER}</version>
+                <version>1.0.35</version>
             </dependency>
 			<dependency>
                 <groupId>com.github.sedovalx.cassandra.services</groupId>
                 <artifactId>cassandra-service-samples</artifactId>
-                <version>1.0.${env.TRAVIS_BUILD_NUMBER}</version>
+                <version>1.0.35</version>
             </dependency>
 
             <dependency>
@@ -136,6 +136,11 @@
                             <arg>-proc:none</arg>
                         </compilerArgs>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.3</version>
                 </plugin>
             </plugins>
         </pluginManagement>
