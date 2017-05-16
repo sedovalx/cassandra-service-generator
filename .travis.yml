@@ -14,4 +14,4 @@ before_script:
  - mvn versions:set -DnewVersion=1.0.$TRAVIS_BUILD_NUMBER
 
 script:
- - mvn deploy -s settings.xml 
+ - mvn clean deploy -s settings.xml 
